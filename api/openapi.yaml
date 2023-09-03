@@ -1,0 +1,5216 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: basyx-dev@eclipse.org
+    name: The BaSyx Developers
+    url: https://www.eclipse.org/basyx/
+  description: AAS Environment API
+  license:
+    name: MIT Licence
+    url: https://opensource.org/licenses/mit-license.php
+  title: BaSyx AAS Environment Component
+  version: "2.0"
+servers:
+- description: Generated server url
+  url: http://localhost:8081
+paths:
+  /submodels/{submodelIdentifier}:
+    delete:
+      operationId: deleteSubmodelById
+      parameters:
+      - description: The Submodel’s unique id (UTF8-BASE64-URL-encoded)
+        explode: false
+        in: path
+        name: submodelIdentifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Submodel deleted successfully
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Internal Server Error
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Default error handling for unmentioned status codes
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Forbidden
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Bad Request, e.g. the request parameters of the format of\
+            \ the request body is wrong."
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Unauthorized, e.g. the server refused the authorization attempt."
+      summary: Deletes a Submodel
+      tags:
+      - Submodel Repository API
+      x-accepts: application/json
+    get:
+      operationId: getSubmodelById
+      parameters:
+      - description: The Submodel’s unique id (UTF8-BASE64-URL-encoded)
+        explode: false
+        in: path
+        name: submodelIdentifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Determines the structural depth of the respective resource content
+        explode: true
+        in: query
+        name: level
+        required: false
+        schema:
+          default: deep
+          enum:
+          - deep
+          - core
+          type: string
+        style: form
+      - description: Determines to which extent the resource is being serialized
+        explode: true
+        in: query
+        name: extent
+        required: false
+        schema:
+          default: withoutBlobValue
+          enum:
+          - withBlobValue
+          - withoutBlobValue
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Default error handling for unmentioned status codes
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Internal Server Error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Forbidden
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Bad Request, e.g. the request parameters of the format of\
+            \ the request body is wrong."
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Unauthorized, e.g. the server refused the authorization attempt."
+      summary: Returns a specific Submodel
+      tags:
+      - Submodel Repository API
+      x-accepts: application/json
+    put:
+      operationId: putSubmodelById
+      parameters:
+      - description: The Submodel’s unique id (UTF8-BASE64-URL-encoded)
+        explode: false
+        in: path
+        name: submodelIdentifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Determines the structural depth of the respective resource content
+        explode: true
+        in: query
+        name: level
+        required: false
+        schema:
+          default: deep
+          enum:
+          - deep
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Submodel'
+        required: true
+      responses:
+        "204":
+          description: Submodel updated successfully
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Internal Server Error
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Default error handling for unmentioned status codes
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Forbidden
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Bad Request, e.g. the request parameters of the format of\
+            \ the request body is wrong."
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Unauthorized, e.g. the server refused the authorization attempt."
+      summary: Updates an existing Submodel
+      tags:
+      - Submodel Repository API
+      x-content-type: application/json
+      x-accepts: application/json
+  /shells/{aasIdentifier}:
+    delete:
+      operationId: deleteAssetAdministrationShellById
+      parameters:
+      - description: The Asset Administration Shell’s unique id (UTF8-BASE64-URL-encoded)
+        explode: false
+        in: path
+        name: aasIdentifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Internal Server Error
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Default error handling for unmentioned status codes
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Forbidden
+        "204":
+          description: Asset Administration Shell deleted successfully
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Unauthorized, e.g. the server refused the authorization attempt."
+      summary: Deletes an Asset Administration Shell
+      tags:
+      - Asset Administration Shell Repository API
+      x-accepts: application/json
+    get:
+      operationId: getAssetAdministrationShellById
+      parameters:
+      - description: The Asset Administration Shell’s unique id (UTF8-BASE64-URL-encoded)
+        explode: false
+        in: path
+        name: aasIdentifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Default error handling for unmentioned status codes
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Internal Server Error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Forbidden
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Bad Request, e.g. the request parameters of the format of\
+            \ the request body is wrong."
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Unauthorized, e.g. the server refused the authorization attempt."
+      summary: Returns a specific Asset Administration Shell
+      tags:
+      - Asset Administration Shell Repository API
+      x-accepts: application/json
+    put:
+      operationId: putAssetAdministrationShellById
+      parameters:
+      - description: The Asset Administration Shell’s unique id (UTF8-BASE64-URL-encoded)
+        explode: false
+        in: path
+        name: aasIdentifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssetAdministrationShell'
+        required: true
+      responses:
+        "204":
+          description: Asset Administration Shell updated successfully
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Internal Server Error
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Default error handling for unmentioned status codes
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Forbidden
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Bad Request, e.g. the request parameters of the format of\
+            \ the request body is wrong."
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Unauthorized, e.g. the server refused the authorization attempt."
+      summary: Updates an existing Asset Administration Shell
+      tags:
+      - Asset Administration Shell Repository API
+      x-content-type: application/json
+      x-accepts: application/json
+  /shells/{aasIdentifier}/asset-information:
+    get:
+      operationId: getAssetInformationAasRepository
+      parameters:
+      - description: The Asset Administration Shell’s unique id (UTF8-BASE64-URL-encoded)
+        explode: false
+        in: path
+        name: aasIdentifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Internal Server Error
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetInformation'
+          description: Requested Asset Information
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Forbidden
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Bad Request, e.g. the request parameters of the format of\
+            \ the request body is wrong."
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Unauthorized, e.g. the server refused the authorization attempt."
+      summary: Returns the Asset Information
+      tags:
+      - Asset Administration Shell Repository API
+      x-accepts: application/json
+    put:
+      operationId: putAssetInformationAasRepository
+      parameters:
+      - description: The Asset Administration Shell’s unique id (UTF8-BASE64-URL-encoded)
+        explode: false
+        in: path
+        name: aasIdentifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssetInformation'
+        required: true
+      responses:
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Internal Server Error
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Default error handling for unmentioned status codes
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Forbidden
+        "204":
+          description: Asset Information updated successfully
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Bad Request, e.g. the request parameters of the format of\
+            \ the request body is wrong."
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Unauthorized, e.g. the server refused the authorization attempt."
+      summary: Updates the Asset Information
+      tags:
+      - Asset Administration Shell Repository API
+      x-content-type: application/json
+      x-accepts: application/json
+  /concept-descriptions/{cdIdentifier}:
+    delete:
+      operationId: deleteConceptDescriptionById
+      parameters:
+      - description: The Concept Description’s unique id (UTF8-BASE64-URL-encoded)
+        explode: false
+        in: path
+        name: cdIdentifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Internal Server Error
+        "204":
+          description: Concept Description deleted successfully
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Default error handling for unmentioned status codes
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Forbidden
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Bad Request, e.g. the request parameters of the format of\
+            \ the request body is wrong."
+      summary: Deletes a Concept Description
+      tags:
+      - Concept Description Repository API
+      x-accepts: application/json
+    get:
+      operationId: getConceptDescriptionById
+      parameters:
+      - description: The Concept Description’s unique id (UTF8-BASE64-URL-encoded)
+        explode: false
+        in: path
+        name: cdIdentifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Internal Server Error
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Default error handling for unmentioned status codes
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Forbidden
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Bad Request, e.g. the request parameters of the format of\
+            \ the request body is wrong."
+      summary: Returns a specific Concept Description
+      tags:
+      - Concept Description Repository API
+      x-accepts: application/json
+    put:
+      operationId: putConceptDescriptionById
+      parameters:
+      - description: The Concept Description’s unique id (UTF8-BASE64-URL-encoded)
+        explode: false
+        in: path
+        name: cdIdentifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConceptDescription'
+        required: true
+      responses:
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Internal Server Error
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Default error handling for unmentioned status codes
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Forbidden
+        "204":
+          description: Concept Description updated successfully
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Bad Request, e.g. the request parameters of the format of\
+            \ the request body is wrong."
+      summary: Updates an existing Concept Description
+      tags:
+      - Concept Description Repository API
+      x-content-type: application/json
+      x-accepts: application/json
+  /submodels:
+    get:
+      operationId: getAllSubmodels
+      parameters:
+      - description: The value of the semantic id reference (UTF8-BASE64-URL-encoded)
+        explode: true
+        in: query
+        name: semanticId
+        required: false
+        schema:
+          maxLength: 3072
+          minLength: 1
+          type: string
+        style: form
+      - description: The Asset Administration Shell’s IdShort
+        explode: true
+        in: query
+        name: idShort
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The maximum number of elements in the response array
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          enum:
+          - "1"
+          minimum: 1
+          type: string
+        style: form
+      - description: A server-generated identifier retrieved from pagingMetadata that
+          specifies from which position the result listing should continue
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Determines the structural depth of the respective resource content
+        explode: true
+        in: query
+        name: level
+        required: false
+        schema:
+          default: deep
+          enum:
+          - deep
+          - core
+          type: string
+        style: form
+      - description: Determines to which extent the resource is being serialized
+        explode: true
+        in: query
+        name: extent
+        required: false
+        schema:
+          default: withoutBlobValue
+          enum:
+          - withBlobValue
+          - withoutBlobValue
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Default error handling for unmentioned status codes
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Internal Server Error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Forbidden
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Bad Request, e.g. the request parameters of the format of\
+            \ the request body is wrong."
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Unauthorized, e.g. the server refused the authorization attempt."
+      summary: Returns all Submodels
+      tags:
+      - Submodel Repository API
+      x-accepts: application/json
+    post:
+      operationId: postSubmodel
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Submodel'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Submodel'
+          description: Submodel created successfully
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Internal Server Error
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Conflict, a resource which shall be created exists already.\
+            \ Might be thrown if a Submodel or SubmodelElement with the same ShortId\
+            \ is contained in a POST request."
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Default error handling for unmentioned status codes
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Forbidden
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Bad Request, e.g. the request parameters of the format of\
+            \ the request body is wrong."
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Unauthorized, e.g. the server refused the authorization attempt."
+      summary: Creates a new Submodel
+      tags:
+      - Submodel Repository API
+      x-content-type: application/json
+      x-accepts: application/json
+  /submodels/{submodelIdentifier}/submodel-elements:
+    get:
+      operationId: getAllSubmodelElements
+      parameters:
+      - description: The Submodel’s unique id (UTF8-BASE64-URL-encoded)
+        explode: false
+        in: path
+        name: submodelIdentifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The maximum number of elements in the response array
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          enum:
+          - "1"
+          minimum: 1
+          type: string
+        style: form
+      - description: A server-generated identifier retrieved from pagingMetadata that
+          specifies from which position the result listing should continue
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Determines the structural depth of the respective resource content
+        explode: true
+        in: query
+        name: level
+        required: false
+        schema:
+          default: deep
+          enum:
+          - deep
+          - core
+          type: string
+        style: form
+      - description: Determines to which extent the resource is being serialized
+        explode: true
+        in: query
+        name: extent
+        required: false
+        schema:
+          default: withoutBlobValue
+          enum:
+          - withBlobValue
+          - withoutBlobValue
+          type: string
+        style: form
+      responses:
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Internal Server Error
+        "200":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: List of found submodel elements
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Forbidden
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Bad Request, e.g. the request parameters of the format of\
+            \ the request body is wrong."
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Unauthorized, e.g. the server refused the authorization attempt."
+      summary: Returns all submodel elements including their hierarchy
+      tags:
+      - Submodel Repository API
+      x-accepts: application/json
+    post:
+      operationId: postSubmodelElementSubmodelRepo
+      parameters:
+      - description: The Submodel’s unique id (UTF8-BASE64-URL-encoded)
+        explode: false
+        in: path
+        name: submodelIdentifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmodelElement'
+        required: true
+      responses:
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Internal Server Error
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Conflict, a resource which shall be created exists already.\
+            \ Might be thrown if a Submodel or SubmodelElement with the same ShortId\
+            \ is contained in a POST request."
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmodelElement'
+          description: Submodel element created successfully
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Default error handling for unmentioned status codes
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Forbidden
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Bad Request, e.g. the request parameters of the format of\
+            \ the request body is wrong."
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Unauthorized, e.g. the server refused the authorization attempt."
+      summary: Creates a new submodel element
+      tags:
+      - Submodel Repository API
+      x-content-type: application/json
+      x-accepts: application/json
+  /submodels/{submodelIdentifier}/submodel-elements/{idShortPath}:
+    delete:
+      operationId: deleteSubmodelElementByPathSubmodelRepo
+      parameters:
+      - description: The Submodel’s unique id (UTF8-BASE64-URL-encoded)
+        explode: false
+        in: path
+        name: submodelIdentifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: IdShort path to the submodel element (dot-separated)
+        explode: false
+        in: path
+        name: idShortPath
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Submodel element deleted successfully
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Internal Server Error
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Default error handling for unmentioned status codes
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Forbidden
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Bad Request, e.g. the request parameters of the format of\
+            \ the request body is wrong."
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Unauthorized, e.g. the server refused the authorization attempt."
+      summary: Deletes a submodel element at a specified path within the submodel
+        elements hierarchy
+      tags:
+      - Submodel Repository API
+      x-accepts: application/json
+    get:
+      operationId: getSubmodelElementByPathSubmodelRepo
+      parameters:
+      - description: The Submodel’s unique id (UTF8-BASE64-URL-encoded)
+        explode: false
+        in: path
+        name: submodelIdentifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: IdShort path to the submodel element (dot-separated)
+        explode: false
+        in: path
+        name: idShortPath
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Determines the structural depth of the respective resource content
+        explode: true
+        in: query
+        name: level
+        required: false
+        schema:
+          default: deep
+          enum:
+          - deep
+          - core
+          type: string
+        style: form
+      - description: Determines to which extent the resource is being serialized
+        explode: true
+        in: query
+        name: extent
+        required: false
+        schema:
+          default: withoutBlobValue
+          enum:
+          - withBlobValue
+          - withoutBlobValue
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Default error handling for unmentioned status codes
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Internal Server Error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Forbidden
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Bad Request, e.g. the request parameters of the format of\
+            \ the request body is wrong."
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Unauthorized, e.g. the server refused the authorization attempt."
+      summary: Returns a specific submodel element from the Submodel at a specified
+        path
+      tags:
+      - Submodel Repository API
+      x-accepts: application/json
+    post:
+      operationId: postSubmodelElementByPathSubmodelRepo
+      parameters:
+      - description: The Submodel’s unique id (UTF8-BASE64-URL-encoded)
+        explode: false
+        in: path
+        name: submodelIdentifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: IdShort path to the submodel element (dot-separated)
+        explode: false
+        in: path
+        name: idShortPath
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Determines the structural depth of the respective resource content
+        explode: true
+        in: query
+        name: level
+        required: false
+        schema:
+          default: deep
+          enum:
+          - deep
+          - core
+          type: string
+        style: form
+      - description: Determines to which extent the resource is being serialized
+        explode: true
+        in: query
+        name: extent
+        required: false
+        schema:
+          default: withoutBlobValue
+          enum:
+          - withBlobValue
+          - withoutBlobValue
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmodelElement'
+        required: true
+      responses:
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Internal Server Error
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Conflict, a resource which shall be created exists already.\
+            \ Might be thrown if a Submodel or SubmodelElement with the same ShortId\
+            \ is contained in a POST request."
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmodelElement'
+          description: Submodel element created successfully
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Default error handling for unmentioned status codes
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Forbidden
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Bad Request, e.g. the request parameters of the format of\
+            \ the request body is wrong."
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Unauthorized, e.g. the server refused the authorization attempt."
+      summary: Creates a new submodel element at a specified path within submodel
+        elements hierarchy
+      tags:
+      - Submodel Repository API
+      x-content-type: application/json
+      x-accepts: application/json
+  /submodels/{submodelIdentifier}/submodel-elements/{idShortPath}/invoke:
+    post:
+      operationId: invokeOperationSubmodelRepo
+      parameters:
+      - description: The Submodel’s unique id (UTF8-BASE64-URL-encoded)
+        explode: false
+        in: path
+        name: submodelIdentifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: IdShort path to the submodel element (dot-separated)
+        explode: false
+        in: path
+        name: idShortPath
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Determines whether an operation invocation is performed asynchronously
+          or synchronously
+        explode: true
+        in: query
+        name: async
+        required: false
+        schema:
+          default: "false"
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OperationRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Default error handling for unmentioned status codes
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Internal Server Error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Forbidden
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Bad Request, e.g. the request parameters of the format of\
+            \ the request body is wrong."
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Method not allowed - Invoke only valid for Operation submodel
+            element
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Unauthorized, e.g. the server refused the authorization attempt."
+      summary: Synchronously or asynchronously invokes an Operation at a specified
+        path
+      tags:
+      - Submodel Repository API
+      x-content-type: application/json
+      x-accepts: application/json
+  /shells:
+    get:
+      operationId: getAllAssetAdministrationShells
+      parameters:
+      - description: A list of specific Asset identifiers
+        explode: true
+        in: query
+        name: assetIds
+        required: false
+        schema:
+          items:
+            $ref: '#/components/schemas/SpecificAssetID'
+          type: array
+        style: form
+      - description: The Asset Administration Shell’s IdShort
+        explode: true
+        in: query
+        name: idShort
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The maximum number of elements in the response array
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          enum:
+          - "1"
+          minimum: 1
+          type: string
+        style: form
+      - description: A server-generated identifier retrieved from pagingMetadata that
+          specifies from which position the result listing should continue
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Internal Server Error
+        "200":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Requested Asset Administration Shells
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Forbidden
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Bad Request, e.g. the request parameters of the format of\
+            \ the request body is wrong."
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Unauthorized, e.g. the server refused the authorization attempt."
+      summary: Returns all Asset Administration Shells
+      tags:
+      - Asset Administration Shell Repository API
+      x-accepts: application/json
+    post:
+      operationId: postAssetAdministrationShell
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssetAdministrationShell'
+        required: true
+      responses:
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Internal Server Error
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetAdministrationShell'
+          description: Asset Administration Shell created successfully
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Conflict, a resource which shall be created exists already.\
+            \ Might be thrown if a Submodel or SubmodelElement with the same ShortId\
+            \ is contained in a POST request."
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Default error handling for unmentioned status codes
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Forbidden
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Bad Request, e.g. the request parameters of the format of\
+            \ the request body is wrong."
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Unauthorized, e.g. the server refused the authorization attempt."
+      summary: Creates a new Asset Administration Shell
+      tags:
+      - Asset Administration Shell Repository API
+      x-content-type: application/json
+      x-accepts: application/json
+  /shells/{aasIdentifier}/submodel-refs:
+    get:
+      operationId: getAllSubmodelReferencesAasRepository
+      parameters:
+      - description: The Asset Administration Shell’s unique id (UTF8-BASE64-URL-encoded)
+        explode: false
+        in: path
+        name: aasIdentifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The maximum number of elements in the response array
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          enum:
+          - "1"
+          minimum: 1
+          type: string
+        style: form
+      - description: A server-generated identifier retrieved from pagingMetadata that
+          specifies from which position the result listing should continue
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Default error handling for unmentioned status codes
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Internal Server Error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Forbidden
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Bad Request, e.g. the request parameters of the format of\
+            \ the request body is wrong."
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Unauthorized, e.g. the server refused the authorization attempt."
+      summary: Returns all submodel references
+      tags:
+      - Asset Administration Shell Repository API
+      x-accepts: application/json
+    post:
+      operationId: postSubmodelReferenceAasRepository
+      parameters:
+      - description: The Asset Administration Shell’s unique id (UTF8-BASE64-URL-encoded)
+        explode: false
+        in: path
+        name: aasIdentifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reference'
+        required: true
+      responses:
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Internal Server Error
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Conflict, a resource which shall be created exists already.\
+            \ Might be thrown if a Submodel or SubmodelElement with the same ShortId\
+            \ is contained in a POST request."
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Default error handling for unmentioned status codes
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Forbidden
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reference'
+          description: Submodel reference created successfully
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Bad Request, e.g. the request parameters of the format of\
+            \ the request body is wrong."
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Unauthorized, e.g. the server refused the authorization attempt."
+      summary: Creates a submodel reference at the Asset Administration Shell
+      tags:
+      - Asset Administration Shell Repository API
+      x-content-type: application/json
+      x-accepts: application/json
+  /concept-descriptions:
+    get:
+      operationId: getAllConceptDescriptions
+      parameters:
+      - description: The Concept Description’s IdShort
+        explode: true
+        in: query
+        name: idShort
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: IsCaseOf reference (UTF8-BASE64-URL-encoded)
+        explode: true
+        in: query
+        name: isCaseOf
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: DataSpecification reference (UTF8-BASE64-URL-encoded)
+        explode: true
+        in: query
+        name: dataSpecificationRef
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The maximum number of elements in the response array
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          enum:
+          - "1"
+          minimum: 1
+          type: string
+        style: form
+      - description: A server-generated identifier retrieved from pagingMetadata that
+          specifies from which position the result listing should continue
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Internal Server Error
+        "200":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Requested Concept Descriptions
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Forbidden
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Bad Request, e.g. the request parameters of the format of\
+            \ the request body is wrong."
+      summary: Returns all Concept Descriptions
+      tags:
+      - Concept Description Repository API
+      x-accepts: application/json
+    post:
+      operationId: postConceptDescription
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConceptDescription'
+        required: true
+      responses:
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Internal Server Error
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Conflict, a resource which shall be created exists already.\
+            \ Might be thrown if a Submodel or SubmodelElement with the same ShortId\
+            \ is contained in a POST request."
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConceptDescription'
+          description: Concept Description created successfully
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Default error handling for unmentioned status codes
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Forbidden
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Bad Request, e.g. the request parameters of the format of\
+            \ the request body is wrong."
+      summary: Creates a new Concept Description
+      tags:
+      - Concept Description Repository API
+      x-content-type: application/json
+      x-accepts: application/json
+  /submodels/{submodelIdentifier}/submodel-elements/{idShortPath}/$value:
+    get:
+      operationId: getSubmodelElementByPathValueOnlySubmodelRepo
+      parameters:
+      - description: The Submodel’s unique id (UTF8-BASE64-URL-encoded)
+        explode: false
+        in: path
+        name: submodelIdentifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: IdShort path to the submodel element (dot-separated)
+        explode: false
+        in: path
+        name: idShortPath
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Determines the structural depth of the respective resource content
+        explode: true
+        in: query
+        name: level
+        required: false
+        schema:
+          default: deep
+          enum:
+          - deep
+          - core
+          type: string
+        style: form
+      - description: Determines to which extent the resource is being serialized
+        explode: true
+        in: query
+        name: extent
+        required: false
+        schema:
+          default: withoutBlobValue
+          enum:
+          - withBlobValue
+          - withoutBlobValue
+          type: string
+        style: form
+      responses:
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Internal Server Error
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmodelElementValue'
+          description: Requested submodel element
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Forbidden
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Bad Request, e.g. the request parameters of the format of\
+            \ the request body is wrong."
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Unauthorized, e.g. the server refused the authorization attempt."
+      summary: Returns a specific submodel element from the Submodel at a specified
+        path in the ValueOnly representation
+      tags:
+      - Submodel Repository API
+      x-accepts: application/json
+    patch:
+      operationId: patchSubmodelElementByPathValueOnlySubmodelRepo
+      parameters:
+      - description: The Submodel’s unique id (UTF8-BASE64-URL-encoded)
+        explode: false
+        in: path
+        name: submodelIdentifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: IdShort path to the submodel element (dot-separated)
+        explode: false
+        in: path
+        name: idShortPath
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Determines the structural depth of the respective resource content
+        explode: true
+        in: query
+        name: level
+        required: false
+        schema:
+          default: core
+          enum:
+          - core
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmodelElementValue'
+        required: true
+      responses:
+        "204":
+          description: Submodel updated successfully
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Internal Server Error
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Default error handling for unmentioned status codes
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Forbidden
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Bad Request, e.g. the request parameters of the format of\
+            \ the request body is wrong."
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Unauthorized, e.g. the server refused the authorization attempt."
+      summary: Updates the value of an existing SubmodelElement
+      tags:
+      - Submodel Repository API
+      x-content-type: application/json
+      x-accepts: application/json
+  /submodels/{submodelIdentifier}/$value:
+    get:
+      operationId: getSubmodelByIdValueOnly
+      parameters:
+      - description: The Submodel’s unique id (UTF8-BASE64-URL-encoded)
+        explode: false
+        in: path
+        name: submodelIdentifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Determines the structural depth of the respective resource content
+        explode: true
+        in: query
+        name: level
+        required: false
+        schema:
+          default: deep
+          enum:
+          - deep
+          - core
+          type: string
+        style: form
+      - description: Determines to which extent the resource is being serialized
+        explode: true
+        in: query
+        name: extent
+        required: false
+        schema:
+          default: withoutBlobValue
+          enum:
+          - withBlobValue
+          - withoutBlobValue
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Default error handling for unmentioned status codes
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Internal Server Error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Forbidden
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Bad Request, e.g. the request parameters of the format of\
+            \ the request body is wrong."
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Unauthorized, e.g. the server refused the authorization attempt."
+      summary: Returns a specific Submodel in the ValueOnly representation
+      tags:
+      - Submodel Repository API
+      x-accepts: application/json
+  /submodels/{submodelIdentifier}/$metadata:
+    get:
+      operationId: getSubmodelByIdMetadata
+      parameters:
+      - description: The Submodel’s unique id (UTF8-BASE64-URL-encoded)
+        explode: false
+        in: path
+        name: submodelIdentifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Determines the structural depth of the respective resource content
+        explode: true
+        in: query
+        name: level
+        required: false
+        schema:
+          default: deep
+          enum:
+          - deep
+          - core
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Default error handling for unmentioned status codes
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Internal Server Error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Forbidden
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Bad Request, e.g. the request parameters of the format of\
+            \ the request body is wrong."
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Unauthorized, e.g. the server refused the authorization attempt."
+      summary: Returns the metadata attributes of a specific Submodel
+      tags:
+      - Submodel Repository API
+      x-accepts: application/json
+  /serialization:
+    get:
+      operationId: generateSerializationByIds
+      parameters:
+      - description: The Asset Administration Shells' unique ids (UTF8-BASE64-URL-encoded)
+        explode: true
+        in: query
+        name: aasIds
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: The Submodels' unique ids (UTF8-BASE64-URL-encoded)
+        explode: true
+        in: query
+        name: submodelIds
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Include Concept Descriptions?
+        explode: true
+        in: query
+        name: includeConceptDescriptions
+        required: false
+        schema:
+          default: "true"
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Default error handling for unmentioned status codes
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Internal Server Error
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Forbidden
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Bad Request, e.g. the request parameters of the format of\
+            \ the request body is wrong."
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Unauthorized, e.g. the server refused the authorization attempt."
+      summary: Returns an appropriate serialization based on the specified format
+        (see SerializationFormat)
+      tags:
+      - Serialization API
+      x-accepts: application/json
+  /shells/{aasIdentifier}/submodel-refs/{submodelIdentifier}:
+    delete:
+      operationId: deleteSubmodelReferenceByIdAasRepository
+      parameters:
+      - description: The Asset Administration Shell’s unique id (UTF8-BASE64-URL-encoded)
+        explode: false
+        in: path
+        name: aasIdentifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The Submodel’s unique id (UTF8-BASE64-URL-encoded)
+        explode: false
+        in: path
+        name: submodelIdentifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Internal Server Error
+        "204":
+          description: Submodel reference deleted successfully
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Default error handling for unmentioned status codes
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: Forbidden
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Bad Request, e.g. the request parameters of the format of\
+            \ the request body is wrong."
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+          description: "Unauthorized, e.g. the server refused the authorization attempt."
+      summary: Deletes the submodel reference from the Asset Administration Shell.
+        Does not delete the submodel itself!
+      tags:
+      - Asset Administration Shell Repository API
+      x-accepts: application/json
+components:
+  schemas:
+    AdministrativeInformation:
+      example:
+        creator:
+          keys:
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          referredSemanticID: null
+          type: EXTERNAL_REFERENCE
+        templateID: templateID
+        version: version
+        embeddedDataSpecifications:
+        - dataSpecification:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          dataSpecificationContent: "{}"
+        - dataSpecification:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          dataSpecificationContent: "{}"
+        revision: revision
+      properties:
+        version:
+          type: string
+        creator:
+          $ref: '#/components/schemas/Reference'
+        revision:
+          type: string
+        templateID:
+          type: string
+        embeddedDataSpecifications:
+          items:
+            $ref: '#/components/schemas/EmbeddedDataSpecification'
+          type: array
+      type: object
+    DataSpecificationContent:
+      type: object
+    EmbeddedDataSpecification:
+      example:
+        dataSpecification:
+          keys:
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          referredSemanticID: null
+          type: EXTERNAL_REFERENCE
+        dataSpecificationContent: "{}"
+      properties:
+        dataSpecification:
+          $ref: '#/components/schemas/Reference'
+        dataSpecificationContent:
+          type: object
+      type: object
+    Extension:
+      example:
+        refersTo:
+        - keys:
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          referredSemanticID: null
+          type: EXTERNAL_REFERENCE
+        - keys:
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          referredSemanticID: null
+          type: EXTERNAL_REFERENCE
+        semanticID:
+          keys:
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          referredSemanticID: null
+          type: EXTERNAL_REFERENCE
+        valueType: ANY_URI
+        name: name
+        supplementalSemanticIds:
+        - keys:
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          referredSemanticID: null
+          type: EXTERNAL_REFERENCE
+        - keys:
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          referredSemanticID: null
+          type: EXTERNAL_REFERENCE
+        value: value
+      properties:
+        valueType:
+          enum:
+          - ANY_URI
+          - BASE64BINARY
+          - BOOLEAN
+          - BYTE
+          - DATE
+          - DATE_TIME
+          - DECIMAL
+          - DOUBLE
+          - DURATION
+          - FLOAT
+          - GDAY
+          - GMONTH
+          - GMONTH_DAY
+          - GYEAR
+          - GYEAR_MONTH
+          - HEX_BINARY
+          - INT
+          - INTEGER
+          - LONG
+          - NEGATIVE_INTEGER
+          - NON_NEGATIVE_INTEGER
+          - NON_POSITIVE_INTEGER
+          - POSITIVE_INTEGER
+          - SHORT
+          - STRING
+          - TIME
+          - UNSIGNED_BYTE
+          - UNSIGNED_INT
+          - UNSIGNED_LONG
+          - UNSIGNED_SHORT
+          type: string
+        refersTo:
+          items:
+            $ref: '#/components/schemas/Reference'
+          type: array
+        name:
+          type: string
+        value:
+          type: string
+        semanticID:
+          $ref: '#/components/schemas/Reference'
+        supplementalSemanticIds:
+          items:
+            $ref: '#/components/schemas/Reference'
+          type: array
+      type: object
+    Key:
+      example:
+        type: ANNOTATED_RELATIONSHIP_ELEMENT
+        value: value
+      properties:
+        type:
+          enum:
+          - ANNOTATED_RELATIONSHIP_ELEMENT
+          - ASSET_ADMINISTRATION_SHELL
+          - BASIC_EVENT_ELEMENT
+          - BLOB
+          - CAPABILITY
+          - CONCEPT_DESCRIPTION
+          - DATA_ELEMENT
+          - ENTITY
+          - EVENT_ELEMENT
+          - FILE
+          - FRAGMENT_REFERENCE
+          - GLOBAL_REFERENCE
+          - IDENTIFIABLE
+          - MULTI_LANGUAGE_PROPERTY
+          - OPERATION
+          - PROPERTY
+          - RANGE
+          - REFERABLE
+          - REFERENCE_ELEMENT
+          - RELATIONSHIP_ELEMENT
+          - SUBMODEL
+          - SUBMODEL_ELEMENT
+          - SUBMODEL_ELEMENT_COLLECTION
+          - SUBMODEL_ELEMENT_LIST
+          type: string
+        value:
+          type: string
+      type: object
+    LangStringNameType:
+      example:
+        language: language
+        text: text
+      properties:
+        text:
+          type: string
+        language:
+          type: string
+      type: object
+    LangStringTextType:
+      example:
+        language: language
+        text: text
+      properties:
+        text:
+          type: string
+        language:
+          type: string
+      type: object
+    Qualifier:
+      example:
+        valueID:
+          keys:
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          referredSemanticID: null
+          type: EXTERNAL_REFERENCE
+        semanticID:
+          keys:
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          referredSemanticID: null
+          type: EXTERNAL_REFERENCE
+        kind: CONCEPT_QUALIFIER
+        valueType: ANY_URI
+        supplementalSemanticIds:
+        - keys:
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          referredSemanticID: null
+          type: EXTERNAL_REFERENCE
+        - keys:
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          referredSemanticID: null
+          type: EXTERNAL_REFERENCE
+        type: type
+        value: value
+      properties:
+        type:
+          type: string
+        kind:
+          enum:
+          - CONCEPT_QUALIFIER
+          - TEMPLATE_QUALIFIER
+          - VALUE_QUALIFIER
+          type: string
+        valueType:
+          enum:
+          - ANY_URI
+          - BASE64BINARY
+          - BOOLEAN
+          - BYTE
+          - DATE
+          - DATE_TIME
+          - DECIMAL
+          - DOUBLE
+          - DURATION
+          - FLOAT
+          - GDAY
+          - GMONTH
+          - GMONTH_DAY
+          - GYEAR
+          - GYEAR_MONTH
+          - HEX_BINARY
+          - INT
+          - INTEGER
+          - LONG
+          - NEGATIVE_INTEGER
+          - NON_NEGATIVE_INTEGER
+          - NON_POSITIVE_INTEGER
+          - POSITIVE_INTEGER
+          - SHORT
+          - STRING
+          - TIME
+          - UNSIGNED_BYTE
+          - UNSIGNED_INT
+          - UNSIGNED_LONG
+          - UNSIGNED_SHORT
+          type: string
+        valueID:
+          $ref: '#/components/schemas/Reference'
+        value:
+          type: string
+        semanticID:
+          $ref: '#/components/schemas/Reference'
+        supplementalSemanticIds:
+          items:
+            $ref: '#/components/schemas/Reference'
+          type: array
+      type: object
+    Reference:
+      example:
+        keys:
+        - type: ANNOTATED_RELATIONSHIP_ELEMENT
+          value: value
+        - type: ANNOTATED_RELATIONSHIP_ELEMENT
+          value: value
+        referredSemanticID: null
+        type: EXTERNAL_REFERENCE
+      properties:
+        type:
+          enum:
+          - EXTERNAL_REFERENCE
+          - MODEL_REFERENCE
+          type: string
+        keys:
+          items:
+            $ref: '#/components/schemas/Key'
+          type: array
+        referredSemanticID:
+          $ref: '#/components/schemas/Reference'
+      type: object
+    Submodel:
+      example:
+        semanticID:
+          keys:
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          referredSemanticID: null
+          type: EXTERNAL_REFERENCE
+        administration:
+          creator:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          templateID: templateID
+          version: version
+          embeddedDataSpecifications:
+          - dataSpecification:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            dataSpecificationContent: "{}"
+          - dataSpecification:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            dataSpecificationContent: "{}"
+          revision: revision
+        displayName:
+        - language: language
+          text: text
+        - language: language
+          text: text
+        kind: INSTANCE
+        description:
+        - language: language
+          text: text
+        - language: language
+          text: text
+        qualifiers:
+        - valueID:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          semanticID:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          kind: CONCEPT_QUALIFIER
+          valueType: ANY_URI
+          supplementalSemanticIds:
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          type: type
+          value: value
+        - valueID:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          semanticID:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          kind: CONCEPT_QUALIFIER
+          valueType: ANY_URI
+          supplementalSemanticIds:
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          type: type
+          value: value
+        submodelElements:
+        - semanticID:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          extensions:
+          - refersTo:
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            semanticID:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            valueType: ANY_URI
+            name: name
+            supplementalSemanticIds:
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            value: value
+          - refersTo:
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            semanticID:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            valueType: ANY_URI
+            name: name
+            supplementalSemanticIds:
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            value: value
+          idShort: idShort
+          displayName:
+          - language: language
+            text: text
+          - language: language
+            text: text
+          supplementalSemanticIds:
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          description:
+          - language: language
+            text: text
+          - language: language
+            text: text
+          qualifiers:
+          - valueID:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            semanticID:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            kind: CONCEPT_QUALIFIER
+            valueType: ANY_URI
+            supplementalSemanticIds:
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            type: type
+            value: value
+          - valueID:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            semanticID:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            kind: CONCEPT_QUALIFIER
+            valueType: ANY_URI
+            supplementalSemanticIds:
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            type: type
+            value: value
+          category: category
+          embeddedDataSpecifications:
+          - dataSpecification:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            dataSpecificationContent: "{}"
+          - dataSpecification:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            dataSpecificationContent: "{}"
+        - semanticID:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          extensions:
+          - refersTo:
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            semanticID:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            valueType: ANY_URI
+            name: name
+            supplementalSemanticIds:
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            value: value
+          - refersTo:
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            semanticID:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            valueType: ANY_URI
+            name: name
+            supplementalSemanticIds:
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            value: value
+          idShort: idShort
+          displayName:
+          - language: language
+            text: text
+          - language: language
+            text: text
+          supplementalSemanticIds:
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          description:
+          - language: language
+            text: text
+          - language: language
+            text: text
+          qualifiers:
+          - valueID:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            semanticID:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            kind: CONCEPT_QUALIFIER
+            valueType: ANY_URI
+            supplementalSemanticIds:
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            type: type
+            value: value
+          - valueID:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            semanticID:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            kind: CONCEPT_QUALIFIER
+            valueType: ANY_URI
+            supplementalSemanticIds:
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            type: type
+            value: value
+          category: category
+          embeddedDataSpecifications:
+          - dataSpecification:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            dataSpecificationContent: "{}"
+          - dataSpecification:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            dataSpecificationContent: "{}"
+        extensions:
+        - refersTo:
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          semanticID:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          valueType: ANY_URI
+          name: name
+          supplementalSemanticIds:
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          value: value
+        - refersTo:
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          semanticID:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          valueType: ANY_URI
+          name: name
+          supplementalSemanticIds:
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          value: value
+        idShort: idShort
+        supplementalSemanticIds:
+        - keys:
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          referredSemanticID: null
+          type: EXTERNAL_REFERENCE
+        - keys:
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          referredSemanticID: null
+          type: EXTERNAL_REFERENCE
+        id: id
+        category: category
+        embeddedDataSpecifications:
+        - dataSpecification:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          dataSpecificationContent: "{}"
+        - dataSpecification:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          dataSpecificationContent: "{}"
+      properties:
+        submodelElements:
+          items:
+            $ref: '#/components/schemas/SubmodelElement'
+          type: array
+        embeddedDataSpecifications:
+          items:
+            $ref: '#/components/schemas/EmbeddedDataSpecification'
+          type: array
+        id:
+          type: string
+        administration:
+          $ref: '#/components/schemas/AdministrativeInformation'
+        displayName:
+          items:
+            $ref: '#/components/schemas/LangStringNameType'
+          type: array
+        description:
+          items:
+            $ref: '#/components/schemas/LangStringTextType'
+          type: array
+        category:
+          type: string
+        idShort:
+          type: string
+        extensions:
+          items:
+            $ref: '#/components/schemas/Extension'
+          type: array
+        semanticID:
+          $ref: '#/components/schemas/Reference'
+        supplementalSemanticIds:
+          items:
+            $ref: '#/components/schemas/Reference'
+          type: array
+        kind:
+          enum:
+          - INSTANCE
+          - TEMPLATE
+          type: string
+        qualifiers:
+          items:
+            $ref: '#/components/schemas/Qualifier'
+          type: array
+      type: object
+    SubmodelElement:
+      example:
+        semanticID:
+          keys:
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          referredSemanticID: null
+          type: EXTERNAL_REFERENCE
+        extensions:
+        - refersTo:
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          semanticID:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          valueType: ANY_URI
+          name: name
+          supplementalSemanticIds:
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          value: value
+        - refersTo:
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          semanticID:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          valueType: ANY_URI
+          name: name
+          supplementalSemanticIds:
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          value: value
+        idShort: idShort
+        displayName:
+        - language: language
+          text: text
+        - language: language
+          text: text
+        supplementalSemanticIds:
+        - keys:
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          referredSemanticID: null
+          type: EXTERNAL_REFERENCE
+        - keys:
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          referredSemanticID: null
+          type: EXTERNAL_REFERENCE
+        description:
+        - language: language
+          text: text
+        - language: language
+          text: text
+        qualifiers:
+        - valueID:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          semanticID:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          kind: CONCEPT_QUALIFIER
+          valueType: ANY_URI
+          supplementalSemanticIds:
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          type: type
+          value: value
+        - valueID:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          semanticID:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          kind: CONCEPT_QUALIFIER
+          valueType: ANY_URI
+          supplementalSemanticIds:
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          type: type
+          value: value
+        category: category
+        embeddedDataSpecifications:
+        - dataSpecification:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          dataSpecificationContent: "{}"
+        - dataSpecification:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          dataSpecificationContent: "{}"
+      properties:
+        embeddedDataSpecifications:
+          items:
+            $ref: '#/components/schemas/EmbeddedDataSpecification'
+          type: array
+        semanticID:
+          $ref: '#/components/schemas/Reference'
+        supplementalSemanticIds:
+          items:
+            $ref: '#/components/schemas/Reference'
+          type: array
+        displayName:
+          items:
+            $ref: '#/components/schemas/LangStringNameType'
+          type: array
+        description:
+          items:
+            $ref: '#/components/schemas/LangStringTextType'
+          type: array
+        category:
+          type: string
+        idShort:
+          type: string
+        extensions:
+          items:
+            $ref: '#/components/schemas/Extension'
+          type: array
+        qualifiers:
+          items:
+            $ref: '#/components/schemas/Qualifier'
+          type: array
+      type: object
+    Message:
+      example:
+        code: code
+        messageType: Undefined
+        correlationId: correlationId
+        text: text
+        timestamp: timestamp
+      properties:
+        code:
+          type: string
+        correlationId:
+          type: string
+        messageType:
+          enum:
+          - Undefined
+          - Info
+          - Warning
+          - Error
+          - Exception
+          type: string
+        text:
+          type: string
+        timestamp:
+          type: string
+      type: object
+    Result:
+      example:
+        messages:
+        - code: code
+          messageType: Undefined
+          correlationId: correlationId
+          text: text
+          timestamp: timestamp
+        - code: code
+          messageType: Undefined
+          correlationId: correlationId
+          text: text
+          timestamp: timestamp
+      properties:
+        messages:
+          items:
+            $ref: '#/components/schemas/Message'
+          type: array
+      type: object
+    AssetAdministrationShell:
+      example:
+        extensions:
+        - refersTo:
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          semanticID:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          valueType: ANY_URI
+          name: name
+          supplementalSemanticIds:
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          value: value
+        - refersTo:
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          semanticID:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          valueType: ANY_URI
+          name: name
+          supplementalSemanticIds:
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          value: value
+        idShort: idShort
+        administration:
+          creator:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          templateID: templateID
+          version: version
+          embeddedDataSpecifications:
+          - dataSpecification:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            dataSpecificationContent: "{}"
+          - dataSpecification:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            dataSpecificationContent: "{}"
+          revision: revision
+        displayName:
+        - language: language
+          text: text
+        - language: language
+          text: text
+        derivedFrom:
+          keys:
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          referredSemanticID: null
+          type: EXTERNAL_REFERENCE
+        description:
+        - language: language
+          text: text
+        - language: language
+          text: text
+        assetInformation:
+          assetKind: INSTANCE
+          specificAssetIds:
+          - externalSubjectID:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            semanticID:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            name: name
+            supplementalSemanticIds:
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            value: value
+          - externalSubjectID:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            semanticID:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            name: name
+            supplementalSemanticIds:
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            value: value
+          defaultThumbnail:
+            path: path
+            contentType: contentType
+          globalAssetID: globalAssetID
+          assetType: assetType
+        id: id
+        category: category
+        embeddedDataSpecifications:
+        - dataSpecification:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          dataSpecificationContent: "{}"
+        - dataSpecification:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          dataSpecificationContent: "{}"
+        submodels:
+        - keys:
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          referredSemanticID: null
+          type: EXTERNAL_REFERENCE
+        - keys:
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          referredSemanticID: null
+          type: EXTERNAL_REFERENCE
+      properties:
+        assetInformation:
+          $ref: '#/components/schemas/AssetInformation'
+        submodels:
+          items:
+            $ref: '#/components/schemas/Reference'
+          type: array
+        derivedFrom:
+          $ref: '#/components/schemas/Reference'
+        embeddedDataSpecifications:
+          items:
+            $ref: '#/components/schemas/EmbeddedDataSpecification'
+          type: array
+        id:
+          type: string
+        administration:
+          $ref: '#/components/schemas/AdministrativeInformation'
+        displayName:
+          items:
+            $ref: '#/components/schemas/LangStringNameType'
+          type: array
+        description:
+          items:
+            $ref: '#/components/schemas/LangStringTextType'
+          type: array
+        category:
+          type: string
+        idShort:
+          type: string
+        extensions:
+          items:
+            $ref: '#/components/schemas/Extension'
+          type: array
+      type: object
+    AssetInformation:
+      example:
+        assetKind: INSTANCE
+        specificAssetIds:
+        - externalSubjectID:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          semanticID:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          name: name
+          supplementalSemanticIds:
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          value: value
+        - externalSubjectID:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          semanticID:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          name: name
+          supplementalSemanticIds:
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          value: value
+        defaultThumbnail:
+          path: path
+          contentType: contentType
+        globalAssetID: globalAssetID
+        assetType: assetType
+      properties:
+        assetKind:
+          enum:
+          - INSTANCE
+          - NOT_APPLICABLE
+          - TYPE
+          type: string
+        assetType:
+          type: string
+        defaultThumbnail:
+          $ref: '#/components/schemas/Resource'
+        globalAssetID:
+          type: string
+        specificAssetIds:
+          items:
+            $ref: '#/components/schemas/SpecificAssetID'
+          type: array
+      type: object
+    Resource:
+      example:
+        path: path
+        contentType: contentType
+      properties:
+        contentType:
+          type: string
+        path:
+          type: string
+      type: object
+    SpecificAssetID:
+      example:
+        externalSubjectID:
+          keys:
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          referredSemanticID: null
+          type: EXTERNAL_REFERENCE
+        semanticID:
+          keys:
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          referredSemanticID: null
+          type: EXTERNAL_REFERENCE
+        name: name
+        supplementalSemanticIds:
+        - keys:
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          referredSemanticID: null
+          type: EXTERNAL_REFERENCE
+        - keys:
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          referredSemanticID: null
+          type: EXTERNAL_REFERENCE
+        value: value
+      properties:
+        externalSubjectID:
+          $ref: '#/components/schemas/Reference'
+        name:
+          type: string
+        value:
+          type: string
+        semanticID:
+          $ref: '#/components/schemas/Reference'
+        supplementalSemanticIds:
+          items:
+            $ref: '#/components/schemas/Reference'
+          type: array
+      type: object
+    ConceptDescription:
+      example:
+        extensions:
+        - refersTo:
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          semanticID:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          valueType: ANY_URI
+          name: name
+          supplementalSemanticIds:
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          value: value
+        - refersTo:
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          semanticID:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          valueType: ANY_URI
+          name: name
+          supplementalSemanticIds:
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          value: value
+        idShort: idShort
+        administration:
+          creator:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          templateID: templateID
+          version: version
+          embeddedDataSpecifications:
+          - dataSpecification:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            dataSpecificationContent: "{}"
+          - dataSpecification:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            dataSpecificationContent: "{}"
+          revision: revision
+        displayName:
+        - language: language
+          text: text
+        - language: language
+          text: text
+        isCaseOf:
+        - keys:
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          referredSemanticID: null
+          type: EXTERNAL_REFERENCE
+        - keys:
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          - type: ANNOTATED_RELATIONSHIP_ELEMENT
+            value: value
+          referredSemanticID: null
+          type: EXTERNAL_REFERENCE
+        description:
+        - language: language
+          text: text
+        - language: language
+          text: text
+        id: id
+        category: category
+        embeddedDataSpecifications:
+        - dataSpecification:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          dataSpecificationContent: "{}"
+        - dataSpecification:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          dataSpecificationContent: "{}"
+      properties:
+        isCaseOf:
+          items:
+            $ref: '#/components/schemas/Reference'
+          type: array
+        embeddedDataSpecifications:
+          items:
+            $ref: '#/components/schemas/EmbeddedDataSpecification'
+          type: array
+        id:
+          type: string
+        administration:
+          $ref: '#/components/schemas/AdministrativeInformation'
+        displayName:
+          items:
+            $ref: '#/components/schemas/LangStringNameType'
+          type: array
+        description:
+          items:
+            $ref: '#/components/schemas/LangStringTextType'
+          type: array
+        category:
+          type: string
+        idShort:
+          type: string
+        extensions:
+          items:
+            $ref: '#/components/schemas/Extension'
+          type: array
+      type: object
+    OperationRequest:
+      description: Operation request object
+      example:
+        inputArguments:
+        - value:
+            semanticID:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            extensions:
+            - refersTo:
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              semanticID:
+                keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              valueType: ANY_URI
+              name: name
+              supplementalSemanticIds:
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              value: value
+            - refersTo:
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              semanticID:
+                keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              valueType: ANY_URI
+              name: name
+              supplementalSemanticIds:
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              value: value
+            idShort: idShort
+            displayName:
+            - language: language
+              text: text
+            - language: language
+              text: text
+            supplementalSemanticIds:
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            description:
+            - language: language
+              text: text
+            - language: language
+              text: text
+            qualifiers:
+            - valueID:
+                keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              semanticID:
+                keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              kind: CONCEPT_QUALIFIER
+              valueType: ANY_URI
+              supplementalSemanticIds:
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              type: type
+              value: value
+            - valueID:
+                keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              semanticID:
+                keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              kind: CONCEPT_QUALIFIER
+              valueType: ANY_URI
+              supplementalSemanticIds:
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              type: type
+              value: value
+            category: category
+            embeddedDataSpecifications:
+            - dataSpecification:
+                keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              dataSpecificationContent: "{}"
+            - dataSpecification:
+                keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              dataSpecificationContent: "{}"
+        - value:
+            semanticID:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            extensions:
+            - refersTo:
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              semanticID:
+                keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              valueType: ANY_URI
+              name: name
+              supplementalSemanticIds:
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              value: value
+            - refersTo:
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              semanticID:
+                keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              valueType: ANY_URI
+              name: name
+              supplementalSemanticIds:
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              value: value
+            idShort: idShort
+            displayName:
+            - language: language
+              text: text
+            - language: language
+              text: text
+            supplementalSemanticIds:
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            description:
+            - language: language
+              text: text
+            - language: language
+              text: text
+            qualifiers:
+            - valueID:
+                keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              semanticID:
+                keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              kind: CONCEPT_QUALIFIER
+              valueType: ANY_URI
+              supplementalSemanticIds:
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              type: type
+              value: value
+            - valueID:
+                keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              semanticID:
+                keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              kind: CONCEPT_QUALIFIER
+              valueType: ANY_URI
+              supplementalSemanticIds:
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              type: type
+              value: value
+            category: category
+            embeddedDataSpecifications:
+            - dataSpecification:
+                keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              dataSpecificationContent: "{}"
+            - dataSpecification:
+                keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              dataSpecificationContent: "{}"
+        inoutputArguments:
+        - value:
+            semanticID:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            extensions:
+            - refersTo:
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              semanticID:
+                keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              valueType: ANY_URI
+              name: name
+              supplementalSemanticIds:
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              value: value
+            - refersTo:
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              semanticID:
+                keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              valueType: ANY_URI
+              name: name
+              supplementalSemanticIds:
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              value: value
+            idShort: idShort
+            displayName:
+            - language: language
+              text: text
+            - language: language
+              text: text
+            supplementalSemanticIds:
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            description:
+            - language: language
+              text: text
+            - language: language
+              text: text
+            qualifiers:
+            - valueID:
+                keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              semanticID:
+                keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              kind: CONCEPT_QUALIFIER
+              valueType: ANY_URI
+              supplementalSemanticIds:
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              type: type
+              value: value
+            - valueID:
+                keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              semanticID:
+                keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              kind: CONCEPT_QUALIFIER
+              valueType: ANY_URI
+              supplementalSemanticIds:
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              type: type
+              value: value
+            category: category
+            embeddedDataSpecifications:
+            - dataSpecification:
+                keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              dataSpecificationContent: "{}"
+            - dataSpecification:
+                keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              dataSpecificationContent: "{}"
+        - value:
+            semanticID:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            extensions:
+            - refersTo:
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              semanticID:
+                keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              valueType: ANY_URI
+              name: name
+              supplementalSemanticIds:
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              value: value
+            - refersTo:
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              semanticID:
+                keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              valueType: ANY_URI
+              name: name
+              supplementalSemanticIds:
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              value: value
+            idShort: idShort
+            displayName:
+            - language: language
+              text: text
+            - language: language
+              text: text
+            supplementalSemanticIds:
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            description:
+            - language: language
+              text: text
+            - language: language
+              text: text
+            qualifiers:
+            - valueID:
+                keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              semanticID:
+                keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              kind: CONCEPT_QUALIFIER
+              valueType: ANY_URI
+              supplementalSemanticIds:
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              type: type
+              value: value
+            - valueID:
+                keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              semanticID:
+                keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              kind: CONCEPT_QUALIFIER
+              valueType: ANY_URI
+              supplementalSemanticIds:
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              - keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              type: type
+              value: value
+            category: category
+            embeddedDataSpecifications:
+            - dataSpecification:
+                keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              dataSpecificationContent: "{}"
+            - dataSpecification:
+                keys:
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                  value: value
+                referredSemanticID: null
+                type: EXTERNAL_REFERENCE
+              dataSpecificationContent: "{}"
+        clientTimeoutDuration: clientTimeoutDuration
+      properties:
+        inoutputArguments:
+          items:
+            $ref: '#/components/schemas/OperationVariable'
+          type: array
+        inputArguments:
+          items:
+            $ref: '#/components/schemas/OperationVariable'
+          type: array
+        clientTimeoutDuration:
+          pattern: ^(-?)P(?=.)((\d+)Y)?((\d+)M)?((\d+)D)?(T(?=.)((\d+)H)?((\d+)M)?(\d*(\.\d+)?S)?)?$
+          type: string
+      type: object
+    OperationVariable:
+      example:
+        value:
+          semanticID:
+            keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          extensions:
+          - refersTo:
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            semanticID:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            valueType: ANY_URI
+            name: name
+            supplementalSemanticIds:
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            value: value
+          - refersTo:
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            semanticID:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            valueType: ANY_URI
+            name: name
+            supplementalSemanticIds:
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            value: value
+          idShort: idShort
+          displayName:
+          - language: language
+            text: text
+          - language: language
+            text: text
+          supplementalSemanticIds:
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          - keys:
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            - type: ANNOTATED_RELATIONSHIP_ELEMENT
+              value: value
+            referredSemanticID: null
+            type: EXTERNAL_REFERENCE
+          description:
+          - language: language
+            text: text
+          - language: language
+            text: text
+          qualifiers:
+          - valueID:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            semanticID:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            kind: CONCEPT_QUALIFIER
+            valueType: ANY_URI
+            supplementalSemanticIds:
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            type: type
+            value: value
+          - valueID:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            semanticID:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            kind: CONCEPT_QUALIFIER
+            valueType: ANY_URI
+            supplementalSemanticIds:
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            - keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            type: type
+            value: value
+          category: category
+          embeddedDataSpecifications:
+          - dataSpecification:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            dataSpecificationContent: "{}"
+          - dataSpecification:
+              keys:
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              - type: ANNOTATED_RELATIONSHIP_ELEMENT
+                value: value
+              referredSemanticID: null
+              type: EXTERNAL_REFERENCE
+            dataSpecificationContent: "{}"
+      properties:
+        value:
+          $ref: '#/components/schemas/SubmodelElement'
+      type: object
+    SubmodelElementValue:
+      type: object
+
